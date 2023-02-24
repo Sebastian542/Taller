@@ -58,8 +58,8 @@ public class Controller {
 		
 		//System.out.println("Almacene : "+separados.size());
 
-		//Delitos por genero 8
-	
+		//Delitos por genero 8-
+		
 		
       
 	}
