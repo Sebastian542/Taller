@@ -35,33 +35,35 @@ public class Controller {
 		}
 		
 		for (int i=0;i<elementos.size();i++) {
-			   String separador = ",";
+			   String separador = "";
 			   //obtengo la fila
 			   String palabra=(String) elementos.get(i);
 			   //separo dentro de un arreglo de string por comas la fila
-			   String[] elemento=palabra.split(separador);
+			   String[] elemento=palabra.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
 		
 			   //Recorro elemento por elemnto del arreglo para añadir cada elemento por separado
 			   for (String caracter:elemento) {
+				  // System.out.println(caracter);
 				   separados.add(caracter);
 
 		        }
 		}
-		System.out.println("Por  : "+separados.get(8));
-		
-		for (int b=8;b<separados.size();) {
-			
-			genero.add(separados.get(b+8));
+
+		int x=0;
+	for (int b=8;b<=separados.size();) {
+			b=b+13;
+			genero.add(separados.get(b));
 			System.out.println(genero);
 			
 		}
-		
-		//System.out.println("Almacene : "+separados.size());
-
-		//Delitos por genero 8-
-		
-		
-      
+	
+	
+	
+	
+	
+	
+	
+	
 	}
 }
 	
