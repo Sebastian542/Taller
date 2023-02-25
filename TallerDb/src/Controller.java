@@ -13,7 +13,7 @@ public class Controller {
 		
 
 		double tam =archivo.length();
-		DecimalFormat formato = new DecimalFormat("#.00");
+		DecimalFormat formato = new DecimalFormat("0.00");
 		System.out.println("El tamaño es : "+formato.format(tam)+" bytes");
 		double kb=tam/1000;
 		System.out.println("El tamaño es : "+formato.format(kb)+" kb");
@@ -35,7 +35,7 @@ public class Controller {
 		}
 		
 		for (int i=0;i<elementos.size();i++) {
-			   String separador = "";
+			   
 			   //obtengo la fila
 			   String palabra=(String) elementos.get(i);
 			   //separo dentro de un arreglo de string por comas la fila
@@ -45,18 +45,16 @@ public class Controller {
 			   for (String caracter:elemento) {
 				  // System.out.println(caracter);
 				   separados.add(caracter);
-
 		        }
 		}
 
-		int x=0;
-	for (int b=8;b<=separados.size();) {
-			b=b+13;
-			genero.add(separados.get(b));
-			System.out.println(genero);
+	//Esto se encarga de tomar los registros de genero
+			for (int b=8;b<=separados.size();) {
+					b=b+13;
+					genero.add(separados.get(b));
+				//	System.out.println(genero);
+				}
 			
-		}
-	
 	
 	
 	
