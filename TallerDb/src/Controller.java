@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.Scanner;
 
@@ -48,17 +49,17 @@ public class Controller {
 		        }
 		}
 
-	//Esto se encarga de tomar los registros de genero
-			for (int b=8;b<=separados.size();) {
-					b=b+13;
-					genero.add(separados.get(b));
-				//	System.out.println(genero);
-				}
-			
-	
-	
-	
-	
+	//Esto se encarga de tomar los registros de genero-------Toco do while porque el for se puso violento
+		int b=8;
+		do {
+			genero.add(separados.get(b));
+			b+=13;
+		}while(b<=separados.size());
+		
+		System.out.println("El total de generos es : "+(genero.size()-1));
+		System.out.println("El total de hombres  : "+Collections.frequency(genero, "MASCULINO") );
+		System.out.println("El total de mujeres  : "+Collections.frequency(genero, "FEMENINO") );
+
 	
 	
 	
