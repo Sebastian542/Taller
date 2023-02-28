@@ -28,7 +28,10 @@ public class Controller {
 		ArrayList elementos=new ArrayList();
 		ArrayList separados=new ArrayList();
 		ArrayList genero=new ArrayList();
-	
+		ArrayList Zona = new ArrayList();
+		ArrayList mes = new ArrayList();
+		ArrayList departamento = new ArrayList();
+		ArrayList edad = new ArrayList();
 		while (sc.hasNextLine()) {
 			
 			elementos.add(sc.nextLine());
@@ -54,6 +57,8 @@ public class Controller {
 		do {
 			genero.add(separados.get(b));
 			b+=13;
+			
+			
 		}while(b<=separados.size());
 		
 		System.out.println("El total de generos es : "+(genero.size()-1));
@@ -61,8 +66,55 @@ public class Controller {
 		System.out.println("El total de mujeres  : "+Collections.frequency(genero, "FEMENINO") );
 
 	
-	
-	
+		b=7;
+		do {
+			Zona.add(separados.get(b));
+			b+= 13;
+			
+		}while(b<=separados.size());
+		System.out.println("El total de Zonas es : "+(Zona.size()-1));
+		System.out.println("El total de Rural  : "+Collections.frequency(Zona, "RURAL") );
+		System.out.println("El total de Urbano  : "+Collections.frequency(Zona, "URBANA") );
+
+		/*b=7;
+		do {
+			mes.add(separados.get(b));
+			b+= 13;
+			
+		}while(b<=separados.size());
+		System.out.println("El total de mes es : "+(mes.size()-1));
+		System.out.println("El total de mes  : "+Collections.frequency(Zona, "RURAL") );
+		System.out.println("El total de mes  : "+Collections.frequency(Zona, "URBANA") );*/
+		b=0;
+		do {
+			departamento.add(separados.get(b));
+			b+=13;
+			
+			
+		}while(b<separados.size());
+		System.out.println("El total de departamento es : "+(departamento.size()-1));
+		System.out.println("El total de ANTIOQUIA  : "+Collections.frequency(departamento, "ANTIOQUIA") );
+		System.out.println("El total de CALDAS  : "+Collections.frequency(departamento, "CALDAS") );
+		System.out.println("El total de ATLANTICO  : "+Collections.frequency(departamento, "ATLÁNTICO") );
+		System.out.println("El total de BOLIVAR  : "+Collections.frequency(departamento, "BOLÍVAR") );
+		System.out.println("El total de CUNDINAMARCA  : "+Collections.frequency(departamento, "CUNDINAMARCA") );
+		System.out.println("El total de QUINDIO  : "+Collections.frequency(departamento, "QUINDÍO") );
+		System.out.println("El total de GUAJIRA  : "+Collections.frequency(departamento, "GUAJIRA") );
+		System.out.println("El total de HUILA  : "+Collections.frequency(departamento, "HUILA") );
+		System.out.println("El total de MAGDALENA  : "+Collections.frequency(departamento, "MAGDALENA") );
+		System.out.println("El total de META  : "+Collections.frequency(departamento, "META") );
+		System.out.println("El total de SAN ANDRES  : "+Collections.frequency(departamento, "SAN ANDRÉS") );
+		System.out.println("El total de SUCRE  : "+Collections.frequency(departamento, "SUCRE") );
+		System.out.println("El total de VALLE  : "+Collections.frequency(departamento, "VALLE") );
+		//b =11;
+		/*do {
+			edad.add(separados.get(b));
+			b+= 13;
+			
+		}while(b<=separados.size());
+		System.out.println("El total de Zonas es : "+(edad.size()-1));
+		System.out.println("El total de Rural  : "+Collections.frequency(edad, "RURAL") );
+		System.out.println("El total de Urbano  : "+Collections.frequency(edad, "URBANA") );*/
 	}
 }
 	
