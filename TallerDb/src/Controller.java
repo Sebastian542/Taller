@@ -1,10 +1,19 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.sql.Date;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Scanner;
+
+import javax.swing.plaf.TextUI;
 
 public class Controller {
 	
@@ -32,6 +41,8 @@ public class Controller {
 		ArrayList mes = new ArrayList();
 		ArrayList departamento = new ArrayList();
 		ArrayList edad = new ArrayList();
+		ArrayList<ArrayList> lista = new ArrayList<>();
+		ArrayList<String> fila = new ArrayList<>();
 		while (sc.hasNextLine()) {
 			
 			elementos.add(sc.nextLine());
@@ -133,9 +144,45 @@ public class Controller {
 			}
 			
 			System.out.println("Quitando los elementos de halado quedan : "+separados.size()+" elementos");
+			String[] texto = new String[separados.size()/13];
+			for(int i =0; i<separados.size()/13;i++) {
+				for(int j=0;j<separados.size();j++) {
+					if(fila.size()<14)
+					fila.add((String)separados.get(j)+",");
+				}
+				lista.add(fila);
+				fila = new ArrayList<>();
+				 texto[i] = lista.get(i).toString() ;
+			}
+			    
+				 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");  
+				 LocalDateTime now = LocalDateTime.now(); 
+				String nombre = "C:\\Users\\Juan Sebastian Muñoz\\git\\"+dtf.format(now)+".txt";
 
-		}
+				  try {
+			      File myObj = new File(nombre);
+			      if (myObj.createNewFile()) {
+			        System.out.println("File created: " + myObj.getName());
+			      } else {
+			        System.out.println("File already exists.");
+			      }
+			    } catch (IOException e) {
+			      System.out.println("An error occurred.");
+			      e.printStackTrace();
+			    }
+	 try {
+	      FileWriter myWriter = new FileWriter(nombre);
+	      myWriter.write(Arrays.toString(texto));
+	      myWriter.close();
+	      System.out.println("Successfully wrote to the file.");
+	    } catch (IOException e) {
+	      System.out.println("An error occurred.");
+	      e.printStackTrace();
+	    }
+	  }
 	
+	
+
 
 
 
