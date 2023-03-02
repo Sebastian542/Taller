@@ -157,8 +157,8 @@ public class Controller {
 			    
 				 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");  
 				 LocalDateTime now = LocalDateTime.now(); 
-				String nombre = "C:\\Users\\Juan Sebastian Muñoz\\git\\"+dtf.format(now)+".txt";
-
+				String nombre = System.getProperty("user.dir")+ "\\src\\" +dtf.format(now)+".txt";
+System.out.println("La ruta del que genero es : "+nombre);
 				  try {
 			      File myObj = new File(nombre);
 			      if (myObj.createNewFile()) {
