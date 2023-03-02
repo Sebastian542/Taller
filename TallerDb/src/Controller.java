@@ -38,6 +38,7 @@ public class Controller {
           
 		}
 		
+		
 		for (int i=0;i<elementos.size();i++) {
 			   
 			   //obtengo la fila
@@ -50,7 +51,11 @@ public class Controller {
 				  // System.out.println(caracter);
 				   separados.add(caracter);
 		        }
+			   
 		}
+		
+		System.out.println("El total de elementos almacenados es :"+separados.size());
+		System.out.println("___________________________________________________");
 
 	//Esto se encarga de tomar los registros de genero-------Toco do while porque el for se puso violento
 		int b=8;
@@ -65,7 +70,6 @@ public class Controller {
 		System.out.println("El total de hombres  : "+Collections.frequency(genero, "MASCULINO") );
 		System.out.println("El total de mujeres  : "+Collections.frequency(genero, "FEMENINO") );
 
-	
 		b=7;
 		do {
 			Zona.add(separados.get(b));
@@ -106,8 +110,45 @@ public class Controller {
 		System.out.println("El total de SAN ANDRES  : "+Collections.frequency(departamento, "SAN ANDRÉS") );
 		System.out.println("El total de SUCRE  : "+Collections.frequency(departamento, "SUCRE") );
 		System.out.println("El total de VALLE  : "+Collections.frequency(departamento, "VALLE") );
-		//b =11;
-		/*do {
+		System.out.println("________________________________________________________");
+		System.out.println(separados.get(0)+" - "+separados.get(1)+" - "+separados.get(2)+" - "+separados.get(3)+" - "
+						  +separados.get(4)+" - "+separados.get(5)+" - "+separados.get(6)+" - "+separados.get(7)+" - "
+						  +separados.get(8)+" - "+separados.get(9)+" - "+separados.get(10)+" - "+separados.get(11)+" - "+separados.get(12)+" - ");
+
+		// Aca va el d en proceso 
+	
+		for (int c =18;c<separados.size();c++) {
+	
+				if(separados.get(c).equals("HALADO")) {
+					
+					System.out.println("Encontre la palabra "+separados.get(c));
+					
+					for (int d=1;d<=13;d++) {
+						
+						separados.remove(c-5);
+					
+					}
+				}
+				c=c+6;
+			}
+			
+			System.out.println("Quitando los elementos de halado quedan : "+separados.size()+" elementos");
+
+		}
+	
+
+
+
+
+//System.out.println("Aca vamos :"+separados.get(12+6));
+//if () {
+//	
+//	
+//}
+
+		
+		/*b =11;
+		do {
 			edad.add(separados.get(b));
 			b+= 13;
 			
@@ -115,7 +156,10 @@ public class Controller {
 		System.out.println("El total de Zonas es : "+(edad.size()-1));
 		System.out.println("El total de Rural  : "+Collections.frequency(edad, "RURAL") );
 		System.out.println("El total de Urbano  : "+Collections.frequency(edad, "URBANA") );*/
+		
+		
+		//Elimine del archivo los delitos registrados que tengan por modalidad: “Halado”.-
+		
 	}
-}
-	
+
 
