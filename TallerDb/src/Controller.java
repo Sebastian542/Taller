@@ -1,41 +1,39 @@
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.sql.Date;
+import java.io.PrintWriter;
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.Scanner;
-
-import javax.swing.plaf.TextUI;
 
 public class Controller {
 	
+	
 	public static void main(String[] args) throws FileNotFoundException {
-
+		String texto="";
 		File archivo = new File(System.getProperty("user.dir")+ "\\src\\archivo-1.txt");
 		
 
 		double tam =archivo.length();
 		DecimalFormat formato = new DecimalFormat("0.00");
-		System.out.println("El tamaño es : "+formato.format(tam)+" bytes");
+		System.out.println("El tamaÃ±o es : "+formato.format(tam)+" bytes");
 		double kb=tam/1000;
-		System.out.println("El tamaño es : "+formato.format(kb)+" kb");
+		System.out.println("El tamaÃ±o es : "+formato.format(kb)+" kb");
 		double mb=kb/1000;
-		System.out.println("El tamaño es : "+formato.format(mb)+" mb");
+		System.out.println("El tamaÃ±o es : "+formato.format(mb)+" mb");
 		System.out.println("___________________________________________________");
 		
 		//Muestro los registros leidos
 		Scanner sc = new Scanner(archivo);
 		String dato;
 		ArrayList elementos=new ArrayList();
-		ArrayList separados=new ArrayList();
+		ArrayList<String> separados=new ArrayList();
 		ArrayList genero=new ArrayList();
 		ArrayList Zona = new ArrayList();
 		ArrayList mes = new ArrayList();
@@ -57,7 +55,7 @@ public class Controller {
 			   //separo dentro de un arreglo de string por comas la fila
 			   String[] elemento=palabra.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
 		
-			   //Recorro elemento por elemnto del arreglo para añadir cada elemento por separado
+			   //Recorro elemento por elemnto del arreglo para aÃ±adir cada elemento por separado
 			   for (String caracter:elemento) {
 				  // System.out.println(caracter);
 				   separados.add(caracter);
@@ -110,15 +108,15 @@ public class Controller {
 		System.out.println("El total de departamento es : "+(departamento.size()-1));
 		System.out.println("El total de ANTIOQUIA  : "+Collections.frequency(departamento, "ANTIOQUIA") );
 		System.out.println("El total de CALDAS  : "+Collections.frequency(departamento, "CALDAS") );
-		System.out.println("El total de ATLANTICO  : "+Collections.frequency(departamento, "ATLÁNTICO") );
-		System.out.println("El total de BOLIVAR  : "+Collections.frequency(departamento, "BOLÍVAR") );
+		System.out.println("El total de ATLANTICO  : "+Collections.frequency(departamento, "ATLÃ�NTICO") );
+		System.out.println("El total de BOLIVAR  : "+Collections.frequency(departamento, "BOLÃ�VAR") );
 		System.out.println("El total de CUNDINAMARCA  : "+Collections.frequency(departamento, "CUNDINAMARCA") );
-		System.out.println("El total de QUINDIO  : "+Collections.frequency(departamento, "QUINDÍO") );
+		System.out.println("El total de QUINDIO  : "+Collections.frequency(departamento, "QUINDÃ�O") );
 		System.out.println("El total de GUAJIRA  : "+Collections.frequency(departamento, "GUAJIRA") );
 		System.out.println("El total de HUILA  : "+Collections.frequency(departamento, "HUILA") );
 		System.out.println("El total de MAGDALENA  : "+Collections.frequency(departamento, "MAGDALENA") );
 		System.out.println("El total de META  : "+Collections.frequency(departamento, "META") );
-		System.out.println("El total de SAN ANDRES  : "+Collections.frequency(departamento, "SAN ANDRÉS") );
+		System.out.println("El total de SAN ANDRES  : "+Collections.frequency(departamento, "SAN ANDRÃ‰S") );
 		System.out.println("El total de SUCRE  : "+Collections.frequency(departamento, "SUCRE") );
 		System.out.println("El total de VALLE  : "+Collections.frequency(departamento, "VALLE") );
 		System.out.println("________________________________________________________");
@@ -143,22 +141,34 @@ public class Controller {
 				c=c+6;
 			}
 			
-			System.out.println("Quitando los elementos de halado quedan : "+separados.size()+" elementos");
-			String[] texto = new String[separados.size()/13];
-			for(int i =0; i<separados.size()/13;i++) {
-				for(int j=0;j<separados.size();j++) {
-					if(fila.size()<14)
-					fila.add((String)separados.get(j)+",");
+		System.out.println("Quitando los elementos de halado quedan : "+separados.size()+" elementos");
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");  
+		 LocalDateTime now = LocalDateTime.now(); 
+		String nombre = dtf.format(now)+".txt";		
+		
+		for(int i=0;i<separados.size();i++) {
+					fila.add(separados.get(i));
+					if(fila.size()>12) {
+					lista.add(fila);	 
+					texto = Arrays.toString(lista.toArray()).replace("[", "").replace("]", "");
+					try(FileWriter fw = new FileWriter(System.getProperty("user.dir")+ "\\src\\"+nombre, true);
+						    BufferedWriter bw = new BufferedWriter(fw);
+						    PrintWriter out = new PrintWriter(bw))
+						{
+						    out.println(texto);
+						    //more code
+						    //more code
+						} catch (IOException e) {
+						    //exception handling left as an exercise for the reader
+						}
+					fila =new ArrayList<String>();
+					lista=new ArrayList<ArrayList>();
+					texto="";
+					}
 				}
-				lista.add(fila);
-				fila = new ArrayList<>();
-				 texto[i] = lista.get(i).toString() ;
-			}
-			    
-				 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");  
-				 LocalDateTime now = LocalDateTime.now(); 
-				String nombre = System.getProperty("user.dir")+ "\\src\\" +dtf.format(now)+".txt";
-System.out.println("La ruta del que genero es : "+nombre);
+
+				 
+
 				  try {
 			      File myObj = new File(nombre);
 			      if (myObj.createNewFile()) {
@@ -170,16 +180,7 @@ System.out.println("La ruta del que genero es : "+nombre);
 			      System.out.println("An error occurred.");
 			      e.printStackTrace();
 			    }
-	 try {
-	      FileWriter myWriter = new FileWriter(nombre);
-	      myWriter.write(Arrays.toString(texto));
-	      myWriter.close();
-	      System.out.println("Successfully wrote to the file.");
-	    } catch (IOException e) {
-	      System.out.println("An error occurred.");
-	      e.printStackTrace();
-	    }
-	  }
+	 
 	
 	
 
@@ -205,8 +206,8 @@ System.out.println("La ruta del que genero es : "+nombre);
 		System.out.println("El total de Urbano  : "+Collections.frequency(edad, "URBANA") );*/
 		
 		
-		//Elimine del archivo los delitos registrados que tengan por modalidad: “Halado”.-
+		//Elimine del archivo los delitos registrados que tengan por modalidad: â€œHaladoâ€�.-
 		
 	}
-
+}
 
