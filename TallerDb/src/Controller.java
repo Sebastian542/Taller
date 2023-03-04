@@ -150,7 +150,7 @@ public class Controller {
 					fila.add(separados.get(i));
 					if(fila.size()>12) {
 					lista.add(fila);	 
-					texto = Arrays.toString(lista.toArray()).replace("[", "").replace("]", "");
+					texto = Arrays.toString(lista.toArray()).replace(" ", "").replace("[", "").replace("]", "");
 					try(FileWriter fw = new FileWriter(System.getProperty("user.dir")+ "\\src\\"+nombre, true);
 						    BufferedWriter bw = new BufferedWriter(fw);
 						    PrintWriter out = new PrintWriter(bw))
