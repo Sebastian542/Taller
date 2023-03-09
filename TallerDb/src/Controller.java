@@ -5,11 +5,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class Controller {
@@ -30,15 +34,16 @@ public class Controller {
 		System.out.println("___________________________________________________");
 		
 		//Muestro los registros leidos
+		
 		Scanner sc = new Scanner(archivo);
 		String dato;
 		ArrayList elementos=new ArrayList();
 		ArrayList<String> separados=new ArrayList();
 		ArrayList genero=new ArrayList();
 		ArrayList Zona = new ArrayList();
-		ArrayList mes = new ArrayList();
+		ArrayList<String> mes = new ArrayList();
 		ArrayList departamento = new ArrayList();
-		ArrayList edad = new ArrayList();
+		ArrayList<String> edad = new ArrayList();
 		ArrayList<ArrayList> lista = new ArrayList<>();
 		ArrayList<String> fila = new ArrayList<>();
 		while (sc.hasNextLine()) {
@@ -89,34 +94,71 @@ public class Controller {
 		System.out.println("El total de Rural  : "+Collections.frequency(Zona, "RURAL") );
 		System.out.println("El total de Urbano  : "+Collections.frequency(Zona, "URBANA") );
 
-		/*b=7;
+		b=2;
+		String[] meses= new String[separados.size()];
+		int primerosMes=0;
+		int SegundosMes=0;
 		do {
 			mes.add(separados.get(b));
+			
 			b+= 13;
 			
 		}while(b<=separados.size());
-		System.out.println("El total de mes es : "+(mes.size()-1));
-		System.out.println("El total de mes  : "+Collections.frequency(Zona, "RURAL") );
-		System.out.println("El total de mes  : "+Collections.frequency(Zona, "URBANA") );*/
+		for(int n = 1 ; n<mes.size();n++) {
+			meses = mes.get(n).split("/",-1);
+				if((Integer.parseInt(meses[0])<7)) {
+					primerosMes++;
+				}
+				else {
+					SegundosMes++;
+				}
+		}
+
+		
+		System.out.println("El total de meses es : "+(mes.size()-1));
+		System.out.println("El total de meses primera mitad de año  : "+primerosMes);
+		System.out.println("El total de meses segunda mitad de año : "+SegundosMes);
+		b =11;
+		int segundoRango = 0;
+		int primerRango = 0;
+		int tercerRango = 0;
+		do {
+			edad.add(separados.get(b));
+			b+= 13;
+			
+		}while(b<=separados.size());
+		for(int n = 1 ; n<edad.size();n++) {
+				if((Integer.parseInt(edad.get(n))<30)) {
+					primerRango++;
+				}
+				if((Integer.parseInt(edad.get(n))>=30&&Integer.parseInt(edad.get(n))<=50)) {
+					segundoRango++;
+				}
+				if((Integer.parseInt(edad.get(n))>50)) {
+					tercerRango++;
+				}
+		}
+		System.out.println("El total de edades es : "+(edad.size()-1));
+		System.out.println("El total de menores de 30  : "+primerRango);
+		System.out.println("El total de 30 - 50  : "+segundoRango );
+		System.out.println("El total de mas de 50  : "+tercerRango );
 		b=0;
 		do {
 			departamento.add(separados.get(b));
 			b+=13;
-			
-			
 		}while(b<separados.size());
 		System.out.println("El total de departamento es : "+(departamento.size()-1));
 		System.out.println("El total de ANTIOQUIA  : "+Collections.frequency(departamento, "ANTIOQUIA") );
 		System.out.println("El total de CALDAS  : "+Collections.frequency(departamento, "CALDAS") );
-		System.out.println("El total de ATLANTICO  : "+Collections.frequency(departamento, "ATLÃ�NTICO") );
-		System.out.println("El total de BOLIVAR  : "+Collections.frequency(departamento, "BOLÃ�VAR") );
+		System.out.println("El total de ATLANTICO  : "+Collections.frequency(departamento, "ATLÁNTICO") );
+		System.out.println("El total de BOLIVAR  : "+Collections.frequency(departamento, "BOLÍVAR") );
 		System.out.println("El total de CUNDINAMARCA  : "+Collections.frequency(departamento, "CUNDINAMARCA") );
-		System.out.println("El total de QUINDIO  : "+Collections.frequency(departamento, "QUINDÃ�O") );
+		System.out.println("El total de QUINDIO  : "+Collections.frequency(departamento, "QUINDÍO") );
 		System.out.println("El total de GUAJIRA  : "+Collections.frequency(departamento, "GUAJIRA") );
 		System.out.println("El total de HUILA  : "+Collections.frequency(departamento, "HUILA") );
 		System.out.println("El total de MAGDALENA  : "+Collections.frequency(departamento, "MAGDALENA") );
 		System.out.println("El total de META  : "+Collections.frequency(departamento, "META") );
-		System.out.println("El total de SAN ANDRES  : "+Collections.frequency(departamento, "SAN ANDRÃ‰S") );
+		System.out.println("El total de SAN ANDRES  : "+Collections.frequency(departamento, "SAN ANDRÉS") );
 		System.out.println("El total de SUCRE  : "+Collections.frequency(departamento, "SUCRE") );
 		System.out.println("El total de VALLE  : "+Collections.frequency(departamento, "VALLE") );
 		System.out.println("________________________________________________________");
@@ -161,6 +203,16 @@ public class Controller {
 						} catch (IOException e) {
 						    //exception handling left as an exercise for the reader
 						}
+					try(FileWriter fw = new FileWriter(System.getProperty("user.dir")+ "\\Villarreal_Muñoz_Ramirez\\"+nombre, true);
+						    BufferedWriter bw = new BufferedWriter(fw);
+						    PrintWriter out = new PrintWriter(bw))
+						{
+						    out.println(texto);
+						    //more code
+						    //more code
+						} catch (IOException e) {
+						    //exception handling left as an exercise for the reader
+						}
 					fila =new ArrayList<String>();
 					lista=new ArrayList<ArrayList>();
 					texto="";
@@ -180,11 +232,48 @@ public class Controller {
 			      System.out.println("An error occurred.");
 			      e.printStackTrace();
 			    }
-	 
-	
-	
+				  int cantidad=1;
+					for(int i=0;i<separados.size();i++) {
+						fila.add(separados.get(i));
+						if(fila.size()>12) {
+						nombre="texto"+(cantidad);
+						lista.add(fila);
+						if(cantidad<=20) {
+						texto += Arrays.toString(lista.toArray()).replace(" ", "").replace("[", "").replace("]", "")+"\n";
+							try(FileWriter fw = new FileWriter(System.getProperty("user.dir")+ "\\Villarreal_Muñoz_Ramirez\\numero\\"+nombre,true);
+								    BufferedWriter bw = new BufferedWriter(fw);
+								    PrintWriter out = new PrintWriter(bw))
+							
+								{
+								if(cantidad==1) {
+								 out.println(texto);
+								}
+								if(cantidad>1&&cantidad<21) {
+									out.println(texto);
+								}
+								cantidad++;
+								} catch (IOException e) {
+								    //exception handling left as an exercise for the reader
+								}
+						fila =new ArrayList<String>();
+						lista=new ArrayList<ArrayList>();
+						}
+						}
+					}
 
+					 
 
+					  try {
+				      File myObj = new File(nombre);
+				      if (myObj.createNewFile()) {
+				        System.out.println("File created: " + myObj.getName());
+				      } else {
+				        System.out.println("File already exists.");
+				      }
+				    } catch (IOException e) {
+				      System.out.println("An error occurred.");
+				      e.printStackTrace();
+				    }
 
 
 
@@ -195,16 +284,7 @@ public class Controller {
 //}
 
 		
-		/*b =11;
-		do {
-			edad.add(separados.get(b));
-			b+= 13;
-			
-		}while(b<=separados.size());
-		System.out.println("El total de Zonas es : "+(edad.size()-1));
-		System.out.println("El total de Rural  : "+Collections.frequency(edad, "RURAL") );
-		System.out.println("El total de Urbano  : "+Collections.frequency(edad, "URBANA") );*/
-		
+
 		
 		//Elimine del archivo los delitos registrados que tengan por modalidad: â€œHaladoâ€�.-
 		
