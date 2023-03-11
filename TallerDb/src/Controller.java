@@ -203,7 +203,7 @@ public class Controller {
 						} catch (IOException e) {
 						    //exception handling left as an exercise for the reader
 						}
-					try(FileWriter fw = new FileWriter(System.getProperty("user.dir")+ "\\Villarreal_Muñoz_Ramirez\\"+nombre, true);
+					try(FileWriter fw = new FileWriter(System.getProperty("user.dir")+ "\\Villarreal_Munoz_Ramirez\\"+nombre, true);
 						    BufferedWriter bw = new BufferedWriter(fw);
 						    PrintWriter out = new PrintWriter(bw))
 						{
@@ -240,7 +240,7 @@ public class Controller {
 						lista.add(fila);
 						if(cantidad<=20) {
 						texto += Arrays.toString(lista.toArray()).replace(" ", "").replace("[", "").replace("]", "")+"\n";
-							try(FileWriter fw = new FileWriter(System.getProperty("user.dir")+ "\\Villarreal_Muñoz_Ramirez\\numero\\"+nombre,true);
+							try(FileWriter fw = new FileWriter(System.getProperty("user.dir")+ "\\Villarreal_Munoz_Ramirez\\numero\\"+nombre,true);
 								    BufferedWriter bw = new BufferedWriter(fw);
 								    PrintWriter out = new PrintWriter(bw))
 							
@@ -275,19 +275,30 @@ public class Controller {
 				      e.printStackTrace();
 				    }
 
-
-
-//System.out.println("Aca vamos :"+separados.get(12+6));
-//if () {
-//	
-//	
-//}
-
-		
-
-		
-		//Elimine del archivo los delitos registrados que tengan por modalidad: â€œHaladoâ€�.-
-		
+					  String sCarpAct = System.getProperty("user.dir")+ "\\Villarreal_Munoz_Ramirez";
+					  File carpeta = new File(sCarpAct);
+					  String[] listado = carpeta.list();
+					  if (listado == null || listado.length == 0) {
+					      System.out.println("No hay elementos dentro de la carpeta actual");
+					      return;
+					  }
+					  else {
+					      for (int i=0; i< listado.length; i++) {
+					          System.out.println(listado[i]);
+					      }
+					  }
+					  String sCarpAct2 = System.getProperty("user.dir")+ "\\Villarreal_Munoz_Ramirez\\numero";
+					  File carpeta2 = new File(sCarpAct2);
+					  String[] listado2 = carpeta2.list();
+					  if (listado2 == null || listado2.length == 0) {
+					      System.out.println("No hay elementos dentro de la carpeta actual");
+					      return;
+					  }
+					  else {
+					      for (int i=0; i< listado2.length; i++) {
+					          System.out.println(listado2[i]);
+					      }
+					  }
 	}
 }
 
